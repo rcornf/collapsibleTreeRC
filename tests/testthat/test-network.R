@@ -1,0 +1,42 @@
+library(collapsibleTreelocal)
+context("Network")
+
+org <- data.frame(
+  Manager = c(
+    NA, "Ana", "Ana", "Bill", "Bill", "Bill", "Claudette", "Claudette", "Danny",
+    "Fred", "Fred", "Grace", "Larry", "Larry", "Nicholas", "Nicholas"
+  ),
+  Employee = c(
+    "Ana", "Bill", "Larry", "Claudette", "Danny", "Erika", "Fred", "Grace",
+    "Henri", "Ida", "Joaquin", "Kate", "Mindy", "Nicholas", "Odette", "Peter"
+  ),
+  Title = c(
+    "President", "VP Operations", "VP Finance", "Director", "Director", "Scientist",
+    "Manager", "Manager", "Jr Scientist", "Operator", "Operator", "Associate",
+    "Analyst", "Director", "Accountant", "Accountant"
+  ),
+  stringsAsFactors = FALSE
+)
+
+test_that("root validation", {
+  expect_error(collapsibleTreelocalNetwork(warpbreaks))
+  expect_error(collapsibleTreelocalNetwork(rbind(org, org)))
+})
+
+test_that("network is resolvable", {
+  expect_error(collapsibleTreelocalNetwork(rbind(head(org), tail(org))))
+})
+
+test_that("org chart can be built", {
+  o <- collapsibleTreelocalNetwork(org)
+  expect_is(o, "htmlwidget")
+  expect_is(o$x$data, "list")
+  expect_is(o$x$options$hierarchy, "integer")
+})
+
+test_that("single node tree", {
+  o <- collapsibleTreelocalNetwork(org[1,])
+  expect_is(o, "htmlwidget")
+  expect_is(o$x$data, "list")
+  expect_is(o$x$options$hierarchy, "integer")
+})

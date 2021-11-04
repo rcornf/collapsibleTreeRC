@@ -1,0 +1,30 @@
+.collapsibleTreelocal .node {
+  cursor: pointer;
+}
+
+.collapsibleTreelocal .node circle {
+  fill: #fff;
+  stroke: #000;
+}
+
+.collapsibleTreelocal .node text {
+  font: 10px sans-serif;
+}
+
+.collapsibleTreelocal .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.collapsibleTreelocal div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 3px;
+    font: 10px sans-serif;
+    background: #fff;
+    border: 2px;
+    border-radius: 8px;
+    border-style: solid;
+    pointer-events: none;
+}
